@@ -1,0 +1,209 @@
+/* --- CUTE PURPLE THEME STYLING --- */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 20px;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Nunito', sans-serif;
+    color: #fff;
+    overflow: hidden;
+    transition: background-color 0.5s ease-in-out;
+
+    /* Background image */
+    background-image: url('backgroundd.png'); /* Replace with your image path */
+    background-size: cover;      /* Make image cover the entire screen */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat;
+}
+
+
+#game-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 900px;
+}
+
+#gameCanvas {
+width: 82%;
+height: auto;
+max-width: 800px;
+max-height: 600px;
+background: #222;
+border-radius: 10px;
+display: block;
+margin: auto;
+}
+
+
+h1 {
+    color: #e6e6fa;
+    font-size: 3.0em;
+    font-family: 'Dancing Script', cursive;
+    margin-bottom: 15px;
+
+    text-shadow:
+        2px 2px 6px #5a0b72,  /* original purple shadow */
+        2px 2px 10px #fff;     /* white glow around the purple shadow */
+}
+
+
+canvas {
+    background-color: #6a5acd;
+    border: 10px solid #e6e6fa;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), inset 0 0 15px rgba(0,0,0,0.2);
+    transition: background-color 0.5s ease-in-out;
+    max-width: 900px;   /* keeps it from being too huge on big screens */
+    aspect-ratio: 4/3;  /* maintains original proportions */
+    width: 100%;
+    height: 100%;
+}
+
+.canvas-wrapper {
+    width: 95vw;
+    max-width: 900px;
+}
+
+#game-wrapper {
+    position: relative;   /* make HUD position relative to the canvas box */
+    display: inline-block;
+}
+
+#hud {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 75%;
+    color: #fff;
+    font-size: 1.2em;
+    text-shadow: 1px 1px 3px #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: none; /* prevents blocking clicks inside canvas */
+}
+
+#hud button {
+    pointer-events: auto; /* allow clicks only on button */
+}
+
+
+#hud > div { display: flex; gap: 10px; }
+#menu-button, #sound-toggle {
+    background-color: #6a5acd;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 16px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-left: 10px; /* spacing between buttons */
+}
+
+#menu-button:hover, #sound-toggle:hover {
+    background-color: #483d8b;
+}
+
+/* --- MENU & MESSAGE STYLES --- */
+.menu-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+    background-color: rgba(72, 61, 139, 0.95);
+    padding: 30px 40px;
+    border-radius: 20px;
+    border: 5px solid #d8b4fe;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+    z-index: 10;
+}
+.menu-screen h2 { margin-top: 0; padding:10px; font-size: 2em; }
+.menu-button { font-family: 'Nunito', sans-serif; display: block; width: 100%; font-size: 1.8em; font-weight: 700; padding: 15px; margin-bottom: 15px; border: none; border-radius: 15px; background-color: #bfa7e0; color: #333; cursor: pointer; transition: all 0.2s; }
+.menu-button:hover { background-color: #d8b4fe; transform: scale(1.02); }
+
+#level-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px; }
+.level-button { font-family: 'Nunito', sans-serif; font-size: 1.5em; font-weight: 700; padding: 20px; border: none; border-radius: 15px; background-color: #bfa7e0; color: #333; cursor: pointer; transition: all 0.2s; }
+.level-button:hover { background-color: #d8b4fe; transform: scale(1.05); }
+
+.back-button { margin-left: 230px; font-family: 'Nunito', sans-serif; font-size: 1em; font-weight: 700; padding: 10px 25px; margin-top: 20px; background-color: #ffafcc; border: none; color: #333; border-radius: 12px; cursor: pointer; transition: all 0.2s; }
+.back-button:hover { background-color: #ffc8dd; }
+
+#level-select-screen h2 {
+ margin-top: -20px;  
+ margin-bottom: 10px;
+ font-size: 30px;
+  text-align: center; 
+}
+
+/* Customization Screen */
+#customize-screen h2 {
+  margin-top: -20px; 
+  margin-bottom: 10px;
+  text-align: center;
+}
+.customize-content {height: 300px; display: flex;justify-content: center;align-items: flex-start;gap: 30px;}
+.customize-options {flex: 1;display: flex;flex-direction: column;gap: 25px;}
+.preview-container {flex: 0 0 200px; display: flex;align-items: center;justify-content: center;background: rgba(0,0,0,0.2);border-radius: 15px;padding: 15px;}
+.preview-container canvas {width: 150px;height: 150px;}
+.option-category h3 {margin: 0 0 8px;font-size: 1.2em;}
+.option-grid {display: flex;flex-wrap: wrap;gap: 12px;}
+.color-swatch {width: 40px; height: 40px; border-radius: 8px;border: 3px solid transparent; cursor: pointer; transition: border-color 0.2s;}
+.option-button {min-width: 70px;padding: 8px 12px; font-size: 0.9em;border-radius: 8px; background-color: rgba(0,0,0,0.3); color: #fff; border: 2px solid transparent; cursor: pointer; text-align: center;}
+.option-button:hover, .color-swatch:hover {border-color: #fff;}
+.option-button.selected, .color-swatch.selected { border-color: #FFD700;}
+
+
+#level-complete-message, #win-message { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; border-radius: 25px; text-align: center; }
+#level-complete-message {
+    font-size: 2em;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+    pointer-events: none; /* prevents blocking clicks */
+    text-align: center;
+}
+#win-message { background-color: rgba(72, 61, 139, 0.95); padding: 40px; border: 5px solid #d8b4fe; box-shadow: 0 5px 20px rgba(0,0,0,0.4); font-size: 2.5em; }
+#win-message button { margin-top: 20px; padding: 12px 28px; font-family: 'Nunito', sans-serif; font-size: 0.7em; font-weight: 700; border: none; background-color: #ffafcc; color: #333; border-radius: 15px; cursor: pointer; transition: all 0.2s; }
+#win-message button:hover { background-color: #ffc8dd; transform: scale(1.05); }
+
+.hidden { display: none !important; }
+
+#home-button {
+    position: fixed;
+    top: 15px;        
+    left: 15px;       
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;        
+    background-color: rgba(255, 255, 255, 0.1); 
+    color: #fff;                
+    font-size: 1.5rem;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 3px rgba(255, 255, 255, 0.3); 
+    transition: all 0.3s ease-in-out;
+    z-index: 1000; 
+    outline: none;
+    border: none;
+}
+
+#home-button:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.5); 
+    background-color: rgba(255, 255, 255, 0.2); 
+}

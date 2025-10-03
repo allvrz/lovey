@@ -1,0 +1,185 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to top, #bda8cf, #3d0a5e, #6a0572, #b83280);
+  color: #fff;
+  overflow: hidden;
+  font-family: 'Quicksand', sans-serif;
+  position: relative;
+}
+
+/* Background with blinking effect */
+.background {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('backgroundd.png') center/cover no-repeat;
+  animation: backgroundBlink 6s ease-in-out infinite alternate;
+  z-index: -3;
+}
+
+/* Moon glow */
+.moon-glow {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,200,0.9) 40%, transparent 80%);
+  animation: glow 3s ease-in-out infinite alternate;
+  z-index: -1;
+}
+
+/* Animations */
+@keyframes backgroundBlink {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.85; }
+  100% { opacity: 1; }
+}
+
+@keyframes glow {
+  from { opacity: 0.5; transform: translateX(-50%) scale(1); }
+  to   { opacity: 1;   transform: translateX(-50%) scale(1.05); }
+}
+
+/* Dashboard content centered */
+.dashboard {
+  display: flex;
+  flex-direction: column; /* Greeting on top, menu below */
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Fill the screen */
+  text-align: center;
+  padding: 20px;
+  z-index: 10;
+}
+
+.greeting {
+  font-family: 'Dancing Script', cursive;
+  font-size: 4.5rem;
+  margin-bottom: 40px;
+  font-weight: 700;
+  text-shadow:
+        2px 2px 6px #5a0b72,  /* original purple shadow */
+        2px 2px 10px #fff;     /* white glow around the purple shadow */
+  animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); text-shadow: 0px 0px 6px #5a0b72, 0 0 15px rgba(255,255,255,0.9); }
+  50% { transform: scale(1.05); text-shadow: 0px 0px 15px #5a0b72, 0 0 25px rgba(255,200,255,1); }
+}
+
+/* Menu - single row */
+.menu {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Aligns items nicely */
+  gap: 40px;
+  flex-wrap: nowrap; /* Keep one line */
+  width:100%
+}
+
+/* Menu items */
+.menu-item {
+  display: flex;
+  flex-direction: column; /* Icon above, label below */
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s;
+  font-family: 'Quicksand', sans-serif;
+  animation: float 1s ease-in-out infinite;
+  text-decoration: none; /* No underline */
+  color: #fff; /* White text */
+}
+
+.menu-item:nth-child(1) { animation-delay: 0s; }
+.menu-item:nth-child(2) { animation-delay: 0.3s; }
+.menu-item:nth-child(3) { animation-delay: 0.6s; }
+.menu-item:nth-child(4) { animation-delay: 0.9s; }
+.menu-item:nth-child(5) { animation-delay: 1.2s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.menu-item:hover {
+  transform: translateY(-5px);
+}
+
+.menu-item p {
+  font-size: 1.1rem;
+  margin-top: 10px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: #fff;
+  text-align: center;
+}
+
+.menu-item:hover p {
+  text-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.9),
+    0 0 20px rgba(255, 255, 255, 0.6),
+    0 0 30px rgba(255, 255, 255, 0.4);
+}
+
+/* Circle bubbles */
+.bubble {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.bubble:hover {
+  animation: pulseGlow 0.5s infinite alternate;
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 
+      0 0 20px rgba(255, 255, 255, 0.8),
+      0 0 40px rgba(255, 255, 255, 0.6),
+      0 0 60px rgba(255, 255, 255, 0.4);
+  }
+  100% {
+    box-shadow: 
+      0 0 30px rgba(255, 255, 255, 1),
+      0 0 60px rgba(255, 255, 255, 0.8),
+      0 0 90px rgba(255, 255, 255, 0.6);
+  }
+}
+
+.bubble img {
+  width: 50px;
+  height: 50px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .greeting { font-size: 2.3rem; margin-bottom: 25px; }
+  .bubble { width: 80px; height: 80px; }
+  .bubble img { width: 40px; height: 40px; }
+  .menu { gap: 20px; flex-wrap: wrap; } /* Wrap for mobile */
+}

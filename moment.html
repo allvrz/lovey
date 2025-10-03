@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Count with me</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💜</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: url('backgroundd.png') center/cover no-repeat;
+      color: #fff;
+      font-family: 'Quicksand', sans-serif;
+      overflow: hidden;
+      margin: 0;
+    }
+
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3rem;
+      margin-bottom: 40px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.8), 0 0 20px rgba(255,255,255,0.9);
+    }
+
+    h2 {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.7), 0 0 10px rgba(255,255,255,0.6);
+    }
+
+    .timer {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .time-box {
+      text-align: center;
+    }
+
+    .label {
+      margin-top: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+    }
+
+    .flip {
+      perspective: 500px;
+      width: 80px;
+      height: 100px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .flip-number {
+      background: #6a0dad; /* solid purple */
+      width: 100%;
+      height: 100%;
+      color: #fff;
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+      line-height: 100px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      transform-origin: top;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+    }
+
+    .flip.animate {
+      animation: flipAnim 0.6s ease-in-out forwards;
+    }
+
+    @keyframes flipAnim {
+      0%   { transform: rotateX(0deg); }
+      50%  { transform: rotateX(-90deg); }
+      100% { transform: rotateX(0deg); }
+    }
+
+    .back-btn {
+      margin-top: 50px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      background: #6a0dad;
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      box-shadow: 0 0 25px rgba(255,255,255,0.8),
+                  0 0 45px rgba(255,255,255,0.5);
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2.2rem; }
+      h2 { font-size: 1.2rem; }
+      .flip { width: 60px; height: 75px; }
+      .flip-number { font-size: 1.5rem; line-height: 75px; }
+      .back-btn { margin-top: 30px; width: 80%; text-align: center; }
+    }
+
+    .cute-gif {
+      margin-top: -20px;
+      width: 150px;
+      height: auto;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @media (max-width: 600px) {
+      .cute-gif { width: 60px; }
+    }
+
+    #home-button {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-size: 1.5rem;
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 3px rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease-in-out;
+      z-index: 1000;
+      outline: none;
+      border: none;
+    }
+
+    #home-button:hover {
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255,255,255,0.5);
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <button id="home-button">🏠</button>
+  <h1>Happy Anniversary!</h1>
+  <div class="timer" id="timer">
+    <div class="time-box">
+      <div class="flip" id="years-box"><div class="flip-number">0</div></div>
+      <div class="label">Years</div>
+    </div>
+    <div class="time-box">
+      <div class="flip" id="months-box"><div class="flip-number">0</div></div>
+      <div class="label">Months</div>
+    </div>
+    <div class="time-box">
+      <div class="flip" id="days-box"><div class="flip-number">0</div></div>
+      <div class="label">Days</div>
+    </div>
+    <div class="time-box">
+      <div class="flip" id="hours-box"><div class="flip-number">0</div></div>
+      <div class="label">Hours</div>
+    </div>
+    <div class="time-box">
+      <div class="flip" id="minutes-box"><div class="flip-number">0</div></div>
+      <div class="label">Minutes</div>
+    </div>
+    <div class="time-box">
+      <div class="flip" id="seconds-box"><div class="flip-number">0</div></div>
+      <div class="label">Seconds</div>
+    </div>
+  </div>
+
+  <h2>and yes to more years with you!</h2>
+  <img src="mwa.gif" alt="Cute GIF" class="cute-gif">
+
+  <script>
+    const startDate = new Date("October 5, 2024 00:00:00");
+
+    function getTimeDiff() {
+      const now = new Date();
+      let years = now.getFullYear() - startDate.getFullYear();
+      let months = now.getMonth() - startDate.getMonth();
+      let days = now.getDate() - startDate.getDate();
+      let hours = now.getHours() - startDate.getHours();
+      let minutes = now.getMinutes() - startDate.getMinutes();
+      let seconds = now.getSeconds() - startDate.getSeconds();
+
+      if (seconds < 0) { seconds += 60; minutes--; }
+      if (minutes < 0) { minutes += 60; hours--; }
+      if (hours < 0) { hours += 24; days--; }
+      if (days < 0) {
+        const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+        days += prevMonth;
+        months--;
+      }
+      if (months < 0) { months += 12; years--; }
+
+      return { years, months, days, hours, minutes, seconds };
+    }
+
+    function updateFlip(boxId, value) {
+      const box = document.getElementById(boxId);
+      const numberEl = box.querySelector('.flip-number');
+
+      if (parseInt(numberEl.textContent) === value) return;
+
+      numberEl.textContent = value;
+      box.classList.add('animate');
+
+      setTimeout(() => {
+        box.classList.remove('animate');
+      }, 600);
+    }
+
+    function updateTimer() {
+      const time = getTimeDiff();
+      updateFlip('years-box', time.years);
+      updateFlip('months-box', time.months);
+      updateFlip('days-box', time.days);
+      updateFlip('hours-box', time.hours);
+      updateFlip('minutes-box', time.minutes);
+
+      // Seconds update directly, no animation
+      const secondsEl = document.getElementById('seconds-box').querySelector('.flip-number');
+      secondsEl.textContent = time.seconds;
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    document.getElementById('home-button').addEventListener('click', () => {
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

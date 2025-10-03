@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gift Vouchers</title>
+  <link rel="stylesheet" href="main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: url('backgroundd.png') center/cover no-repeat;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding-top: 40px;
+    }
+
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    }
+
+    /* Voucher Grid */
+    .voucher-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      justify-items: center;
+      width: 90%;
+      max-width: 1200px;
+      margin-bottom: 50px;
+    }
+
+    .voucher {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .voucher img {
+      width: 150px;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .voucher:hover img {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px rgba(255,255,255,0.7);
+    }
+
+    .redeems {
+      margin-top: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+      text-align: center;
+    }
+
+    /* Modal */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal img {
+      max-height: 70vh;
+      max-width: 90vw;
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(255,255,255,0.8);
+      margin-bottom: 20px;
+    }
+
+    .modal-buttons {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+
+    .modal-buttons button {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .redeem-btn {
+      background: #6a0dad;
+      color: #fff;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+
+    .redeem-btn:hover:enabled {
+      box-shadow: 0 0 25px rgba(255,255,255,0.8),
+                  0 0 45px rgba(255,255,255,0.5);
+    }
+
+    .redeem-btn:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+
+    .cancel-btn {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(255,255,255,0.3);
+    }
+
+    .cancel-btn:hover {
+      box-shadow: 0 0 25px rgba(255,255,255,0.8),
+                  0 0 45px rgba(255,255,255,0.5);
+    }
+
+    .redeem-message {
+      font-size: 1rem;
+      font-weight: 500;
+      text-align: center;
+      color: #fff;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+      animation: pop 0.5s ease;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    @media (max-width: 1200px) {
+      .voucher-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    @media (max-width: 900px) {
+      .voucher-grid { grid-template-columns: repeat(3, 1fr); }
+      .voucher img { width: 120px; }
+    }
+
+    @media (max-width: 600px) {
+      .voucher-grid { grid-template-columns: repeat(2, 1fr); }
+      .voucher img { width: 100px; }
+      .modal img { max-height: 60vh; max-width: 90vw; }
+    }
+
+    @media (max-width: 400px) {
+      .voucher-grid { grid-template-columns: 1fr; }
+      .voucher img { width: 90px; }
+      .modal img { max-height: 50vh; max-width: 90vw; }
+    }
+
+    #home-button {
+    position: fixed;
+    top: 15px;        
+    left: 15px;       
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;        
+    background-color: rgba(255, 255, 255, 0.1); 
+    color: #fff;                
+    font-size: 1.5rem;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 3px rgba(255, 255, 255, 0.3); 
+    transition: all 0.3s ease-in-out;
+    z-index: 1000; 
+    outline: none;
+    border: none;
+    }
+
+    #home-button:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.5); 
+    background-color: rgba(255, 255, 255, 0.2); 
+    }
+  </style>
+</head>
+<body>
+    <button id="home-button">🏠</button>
+  <h1>You get free vouchers yay!</h1>
+
+  <div class="voucher-grid" id="voucher-grid"></div>
+
+  <!-- Modal -->
+  <div class="modal" id="voucher-modal">
+    <img src="" alt="Voucher" id="modal-img">
+    <div class="modal-buttons">
+      <button class="redeem-btn" id="redeem-btn">Redeem</button>
+      <button class="cancel-btn" id="cancel-btn">Cancel</button>
+    </div>
+    <div class="redeem-message" id="redeem-message"></div>
+    <p>Let me know by sending a screenshot!</p>
+  </div>
+
+  <script>
+    const voucherData = [
+      { img: 'voucher-1.png', redeems: 3 },
+      { img: 'voucher-2.png', redeems: 5 },
+      { img: 'voucher-3.png', redeems: 5 },
+      { img: 'voucher-4.png', redeems: 99 },
+      { img: 'voucher-5.png', redeems: 2 },
+      { img: 'voucher-6.png', redeems: 3 },
+      { img: 'voucher-7.png', redeems: 2 },
+      { img: 'voucher-8.png', redeems: 1 },
+      { img: 'voucher-9.png', redeems: 2 },
+      { img: 'voucher-10.png', redeems: 1 },
+      { img: 'voucher-11.png', redeems: 1 },
+      { img: 'voucher-12.png', redeems: 99 },
+      { img: 'voucher-13.png', redeems: 5 },
+      { img: 'voucher-14.png', redeems: 10 },
+      { img: 'voucher-15.png', redeems: 3 }
+    ];
+
+    const voucherGrid = document.getElementById('voucher-grid');
+    const modal = document.getElementById('voucher-modal');
+    const modalImg = document.getElementById('modal-img');
+    const redeemBtn = document.getElementById('redeem-btn');
+    const cancelBtn = document.getElementById('cancel-btn');
+    const redeemMessage = document.getElementById('redeem-message');
+
+    let selectedIndex = null;
+
+    function renderVouchers() {
+      voucherGrid.innerHTML = '';
+      voucherData.forEach((voucher, index) => {
+        if (voucher.redeems > 0) {
+          const voucherEl = document.createElement('div');
+          voucherEl.classList.add('voucher');
+          voucherEl.innerHTML = `
+            <img src="${voucher.img}" alt="Voucher ${index + 1}">
+            <div class="redeems">Remaining: ${voucher.redeems}</div>
+          `;
+          voucherEl.addEventListener('click', () => openModal(index));
+          voucherGrid.appendChild(voucherEl);
+        }
+      });
+    }
+
+    function updateRedeemButton() {
+      if (selectedIndex !== null && voucherData[selectedIndex].redeems <= 0) {
+        redeemBtn.disabled = true;
+      } else {
+        redeemBtn.disabled = false;
+      }
+    }
+
+    function openModal(index) {
+      selectedIndex = index;
+      modalImg.src = voucherData[index].img;
+      redeemMessage.textContent = ''; // Clear previous message
+      modal.classList.add('active');
+      updateRedeemButton();
+    }
+
+    redeemBtn.addEventListener('click', () => {
+      if (selectedIndex !== null && voucherData[selectedIndex].redeems > 0) {
+        voucherData[selectedIndex].redeems--;
+        const now = new Date();
+        const timestamp = now.toLocaleString();
+        redeemMessage.textContent = `Redeemed on: ${timestamp}`;
+        renderVouchers();
+        updateRedeemButton();
+        if (voucherData[selectedIndex].redeems <= 0) {
+          setTimeout(() => {
+            modal.classList.remove('active');
+            selectedIndex = null;
+          }, 1500);
+        }
+      }
+    });
+
+    cancelBtn.addEventListener('click', () => {
+      modal.classList.remove('active');
+      selectedIndex = null;
+    });
+
+    // Close modal when clicking outside image
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+        selectedIndex = null;
+      }
+    });
+
+    renderVouchers();
+
+    document.getElementById('home-button').addEventListener('click', () => {
+    window.location.href = 'index.html';
+});
+
+  </script>
+</body>
+</html>
