@@ -477,6 +477,9 @@ menuButton.addEventListener('click', () => {
 playButton.addEventListener('click', () => {
     sounds.click.currentTime = 0;
     if (soundEnabled) sounds.click.play();
+    sounds.customize.pause(); 
+    sounds.customize.currentTime = 0;
+    sounds.customize.loop = false; 
 });
 customizeButton.addEventListener('click', () => {
     sounds.click.currentTime = 0;
