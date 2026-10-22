@@ -83,17 +83,17 @@ const accessories = {
 // =============================== GAME CONTENT ==================================== //
 const levelThemes = [ { body: '#483d8b', canvas: '#6a5acd' }, { body: '#433881', canvas: '#6253c0' }, { body: '#3e3277', canvas: '#5a4cb3' }, { body: '#392d6d', canvas: '#5245a6' }, { body: '#342863', canvas: '#4a3e99' }, { body: '#2f2359', canvas: '#42378c' }, { body: '#2a1e4f', canvas: '#3a307f' }, { body: '#251945', canvas: '#322972' }, { body: '#20143b', canvas: '#2a2265' }, { body: '#1b0f31', canvas: '#221b58' }, { body: '#160a27', canvas: '#1a144b' }, { body: '#11051d', canvas: '#120d3e' }];
 const levelCompleteTexts = 
-["you're only getting started",
-"level 2 complete yay!",
-"wowow so proud of you lovey",
+["hi bebe",
+"2nd year in wiee!",
+"ROUND 4",
 "nastress na ba ni",
-"careful steps!",
-"you're almost there bebe!",
+"pila na ka mins",
+"pikon nani ba",
 "patience love",
 "hapit na hapit na",
 "yayyy",
 "wiwiwiii last one",
-"YESS!!!"];
+"BABABABAM!! ACE!!"];
 /**
  * --- LEVEL DATA GUIDE ---
  * Each object in the `levels` array is a new level.
